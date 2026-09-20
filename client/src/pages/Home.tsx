@@ -14,6 +14,7 @@ import {
   Sparkles,
   X,
 } from "lucide-react";
+import { driveArchive, type ArchiveKind } from "@/data/driveArchive";
 
 type Filter = "الكل" | "صور" | "فيديو" | "تجارب" | "صوت";
 type Work = {
@@ -37,12 +38,16 @@ const works: Work[] = [
 ];
 
 const filters: Filter[] = ["الكل", "صور", "فيديو", "تجارب", "صوت"];
+const archiveFilters: Array<ArchiveKind | "الكل"> = ["الكل", "صور", "فيديو", "صوت", "تجارب", "ملفات"];
 
 export default function Home() {
   const [filter, setFilter] = useState<Filter>("الكل");
+  const [archiveFilter, setArchiveFilter] = useState<ArchiveKind | "الكل">("الكل");
+  const [archiveQuery, setArchiveQuery] = useState("");
   const [selected, setSelected] = useState<Work | null>(null);
   const [menuOpen, setMenuOpen] = useState(false);
   const visibleWorks = useMemo(() => filter === "الكل" ? works : works.filter((work) => work.type === filter), [filter]);
+  const visibleArchive = useMemo(() => driveArchive.filter((item) => (archiveFilter === "الكل" || item.kind === archiveFilter) && item.name.toLocaleLowerCase().includes(archiveQuery.toLocaleLowerCase())), [archiveFilter, archiveQuery]);
 
   const scrollTo = (id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
@@ -57,6 +62,7 @@ export default function Home() {
         <button className="brand" onClick={() => scrollTo("top")} aria-label="العودة إلى الأعلى"><span className="brand-mark"><Sparkles size={15} /></span><span>استوديو <b>بصري</b></span></button>
         <div className={`nav-links ${menuOpen ? "open" : ""}`}>
           <button onClick={() => scrollTo("work")}>الأعمال</button>
+          <button onClick={() => scrollTo("archive")}>الأرشيف</button>
           <button onClick={() => scrollTo("about")}>عن الاستوديو</button>
           <button onClick={() => scrollTo("contact")}>تواصل</button>
         </div>
@@ -86,6 +92,8 @@ export default function Home() {
       </section>
 
       <section id="about" className="about-section container"><div className="about-stamp"><div className="stamp-ring">✳</div><span>أفكار<br />بلا حدود</span></div><div className="about-copy"><span className="section-kicker">/  عن الاستوديو</span><h2>لسنا هنا<br />لصنع المزيد من <em>المحتوى.</em></h2><p>نحن هنا لصنع أعمال تشعر بها. نخلط بين العين الفنية، الأدوات الذكية، والفضول الذي لا يهدأ لنصنع صوراً تحمل معنى، وتجارب تفتح باباً جديداً.</p><div className="about-metrics"><div><b>06</b><span>تخصصات إبداعية</span></div><div><b>∞</b><span>مساحة للتجريب</span></div><div><b>01</b><span>فكرة في كل مرة</span></div></div></div></section>
+
+      <section id="archive" className="archive-section container"><div className="section-heading archive-heading"><div><span className="section-kicker">/  الأرشيف الكامل</span><h2>كل ما في<br /><em>الحقيبة.</em></h2></div><p>48 ملفاً من الصور والفيديو والصوت والتجارب والملفات، مرتبة من مجلد «حقيبة أعمالي» لتبقى كل قصة قريبة.</p></div><div className="archive-toolbar"><div className="archive-tabs">{archiveFilters.map((item) => <button key={item} className={archiveFilter === item ? "active" : ""} onClick={() => setArchiveFilter(item)}>{item}</button>)}</div><input value={archiveQuery} onChange={(event) => setArchiveQuery(event.target.value)} placeholder="ابحث في الأرشيف..." aria-label="ابحث في الأرشيف" /></div><div className="archive-grid">{visibleArchive.map((item) => <a className="archive-card" key={item.id} href={item.url} target="_blank" rel="noreferrer"><div className={`archive-thumb kind-${item.kind}`}>{item.preview ? <img src={item.preview} alt={item.title} loading="lazy" /> : <span className="archive-icon">{item.kind === "فيديو" ? <Film size={23} /> : item.kind === "صوت" ? <Mic2 size={23} /> : item.kind === "تجارب" ? <Gamepad2 size={23} /> : <Layers3 size={23} />}</span>}<span className="archive-kind">{item.kind}</span></div><div className="archive-meta"><span>{item.folder}</span><strong>{item.title}</strong><small>{item.mimeType.split("/").pop()?.toUpperCase()} · {Math.max(1, Math.round(item.size / 1024))} KB</small></div><ArrowUpLeft className="archive-arrow" size={18} /></a>)}</div>{visibleArchive.length === 0 && <div className="archive-empty">لا توجد نتائج مطابقة. جرّب كلمة أخرى.</div>}</section>
 
       <section id="contact" className="contact-section container"><div className="contact-card"><div><span className="section-kicker">/  المشروع القادم</span><h2>لديك فكرة<br /><em>نصنعها معاً.</em></h2></div><a className="contact-button" href="mailto:hello@basri.studio">hello@basri.studio <ArrowUpLeft size={19} /></a><span className="contact-orb"><Sparkles size={25} /></span></div></section>
       <footer className="footer container"><span>© 2026 استوديو بصري</span><span>صُنع بالفضول والذكاء الاصطناعي</span><span className="footer-links"><a href="https://github.com/" target="_blank" rel="noreferrer">GitHub <ExternalLink size={12} /></a><a href="https://drive.google.com/drive/folders/1xndjBDAlxevP-JhJ9DSSjf2868MbA9Qh" target="_blank" rel="noreferrer">مصدر الأعمال <ExternalLink size={12} /></a></span></footer>
