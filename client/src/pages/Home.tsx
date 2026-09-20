@@ -30,11 +30,11 @@ type Work = {
 
 const works: Work[] = [
   { title: "TechZone", label: "متجر التقنية", type: "تجارب", description: "تجربة متجر إلكتروني غامرة بواجهة عربية، مبنية لتجعل التقنية تبدو أقرب وأكثر إنسانية.", image: "/assets/build.webp", accent: "#c9ff54", link: "https://techzonearab-juffxfrw.manus.space", featured: true },
-  { title: "حكايات من الضوء", label: "توليد بصري", type: "صور", description: "سلسلة صور مولدة بالذكاء الاصطناعي تستكشف العلاقة بين الإنسان والمواد والضوء.", image: "/assets/hero.webp", accent: "#ff8f70" },
-  { title: "عالم صغير جداً", label: "كتاب أطفال", type: "صور", description: "شخصيات وألوان مرحة صُممت لبناء عالم قصصي دافئ ومفتوح للخيال.", image: "/assets/children.webp", accent: "#86d5ff" },
-  { title: "على الطريق", label: "فيلم قصير", type: "فيديو", description: "مشهد سينمائي مولد بالذكاء الاصطناعي، من الفكرة إلى الحركة والصوت.", image: "/assets/portrait.webp", accent: "#d6a2ff", link: "https://drive.google.com/drive/folders/15kt1FhN_bSpa_ZPaT2PRinsTblkK_t8U" },
-  { title: "سباق سيارات", label: "لعبة ويب", type: "تجارب", description: "لعبة متصفح خفيفة وسريعة؛ مثال على تحويل الفكرة إلى تفاعل قابل للعب.", image: "/assets/build.webp", accent: "#ffcf70", link: "https://ksnober77-oss.github.io/car-racer-snober/" },
-  { title: "صوت الفكرة", label: "تعليق صوتي", type: "صوت", description: "تجارب صوتية عربية بلهجات ونبرات مختلفة لصناعة حضور يتجاوز الصورة.", image: "/assets/hero.webp", accent: "#85f0d2", link: "https://drive.google.com/drive/folders/1l3rsW5AE8cwByAJka_8g6xmJA_Qy-B5b" },
+  { title: "حكايات من الضوء", label: "توليد بصري", type: "صور", description: "سلسلة صور مولدة بالذكاء الاصطناعي تستكشف العلاقة بين الإنسان والمواد والضوء.", image: "./assets/hero.webp", accent: "#ff8f70" },
+  { title: "عالم صغير جداً", label: "كتاب أطفال", type: "صور", description: "شخصيات وألوان مرحة صُممت لبناء عالم قصصي دافئ ومفتوح للخيال.", image: "./assets/children.webp", accent: "#86d5ff" },
+  { title: "على الطريق", label: "فيلم قصير", type: "فيديو", description: "مشهد سينمائي مولد بالذكاء الاصطناعي، من الفكرة إلى الحركة والصوت.", image: "./assets/portrait.webp", accent: "#d6a2ff", link: "https://drive.google.com/drive/folders/15kt1FhN_bSpa_ZPaT2PRinsTblkK_t8U" },
+  { title: "سباق سيارات", label: "لعبة ويب", type: "تجارب", description: "لعبة متصفح خفيفة وسريعة؛ مثال على تحويل الفكرة إلى تفاعل قابل للعب.", image: "./assets/build.webp", accent: "#ffcf70", link: "https://ksnober77-oss.github.io/car-racer-snober/" },
+  { title: "صوت الفكرة", label: "تعليق صوتي", type: "صوت", description: "تجارب صوتية عربية بلهجات ونبرات مختلفة لصناعة حضور يتجاوز الصورة.", image: "./assets/hero.webp", accent: "#85f0d2", link: "https://drive.google.com/drive/folders/1l3rsW5AE8cwByAJka_8g6xmJA_Qy-B5b" },
 ];
 
 const filters: Filter[] = ["الكل", "صور", "فيديو", "تجارب", "صوت"];
@@ -78,7 +78,7 @@ export default function Home() {
           <div className="hero-actions"><button className="primary-button" onClick={() => scrollTo("work")}>استكشف الأعمال <ArrowUpLeft size={17} /></button><span className="availability"><i /> متاح لمشروع جديد</span></div>
         </div>
         <div className="hero-art reveal delay-1">
-          <div className="art-frame"><img src="/assets/hero.webp" alt="عمل بصري مولد بالذكاء الاصطناعي" /><div className="art-shade" /><div className="art-caption"><span>01 / 06</span><b>THE HUMAN<br />IMAGINATION</b></div></div>
+          <div className="art-frame"><img src="./assets/hero.webp" alt="عمل بصري مولد بالذكاء الاصطناعي" /><div className="art-shade" /><div className="art-caption"><span>01 / 06</span><b>THE HUMAN<br />IMAGINATION</b></div></div>
           <div className="orbit orbit-a" /><div className="orbit orbit-b" /><div className="hero-note">فكرة <span>×</span> تجربة<br /><b>نتيجة لا تُنسى</b></div>
         </div>
       </section>
